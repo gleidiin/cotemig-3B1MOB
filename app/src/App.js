@@ -1,29 +1,58 @@
 import React from 'react';
+import axios from 'axios';
 import './App.css';
 
-const valor = "teste";
-const Elemento = () => <div>qualquer</div>;
+const style ={
+  containerPerfil: {
+    width: "20%", display: "inline-block", backgroundColor: "blue"
+  },
+  imagemPerfil: {
+    display: "block", margin:"0 auto", width: "100%"
+  }
+};
 
-function Ul(props) {
-  return (
-   <div>
-     {props.valor}
-   </div> 
-  )
-}
+const Perfil = (props) => (
+  <div onClick={ () => props.clicou(props.nome, props.imagem) }
+       style={ style.containerPerfil }>
+    <img style={ style.imagemPerfil } src={ props.imagem }></img>
+    <p className="perfil-texto">{ props.nome }</p>
+  </div>
+);
 
-const clicou = () => {
-  prompt("Oi?");
-}
+class App extends React.Component {
 
-function App() {
-  return (
-    <div className="App">
-      <button onClick={clicou} >Clica aqui</button>
-      <Ul valor="teste de valor" /> {valor}
-      <Elemento></Elemento>
-    </div>
-  )
+  constructor(props) {
+    super(props);
+
+    // inicializar o estado
+    this.state = {
+      alunos: []
+    }
+
+    axios.get("http://localhost:8080/alunos")
+      .then(res => {
+        if(res.data) {
+          this.setState({alunos: res.data});
+        }
+      });
+  }
+
+  clone = (nome, imagem) => {
+    const alunos = this.state.alunos;
+    this.setState({ alunos: alunos });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        { 
+          this.state.alunos.map( aluno => 
+            <Perfil clicou={ this.clone } {...aluno} />
+          )
+        }
+      </div>
+    )
+  }
 }
 
 export default App;
