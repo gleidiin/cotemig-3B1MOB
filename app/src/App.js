@@ -1,56 +1,34 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const style ={
-  containerPerfil: {
-    width: "20%", display: "inline-block", backgroundColor: "blue"
-  },
-  imagemPerfil: {
-    display: "block", margin:"0 auto", width: "100%"
-  }
-};
+import HomePage from './containers/HomePage';
+import ComentariosPage from './containers/ComentariosPage';
 
-const Perfil = (props) => (
-  <div onClick={ () => props.clicou(props.nome, props.imagem) }
-       style={ style.containerPerfil }>
-    <img style={ style.imagemPerfil } src={ props.imagem }></img>
-    <p className="perfil-texto">{ props.nome }</p>
-  </div>
-);
+import { Container } from 'react-bootstrap';
+
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-
-    // inicializar o estado
-    this.state = {
-      alunos: []
-    }
-
-    axios.get("http://localhost:8080/alunos")
-      .then(res => {
-        if(res.data) {
-          this.setState({alunos: res.data});
-        }
-      });
+    this.state = { mostraComentario: false }
   }
 
-  clone = (nome, imagem) => {
-    const alunos = this.state.alunos;
-    this.setState({ alunos: alunos });
+  mostraComentario = () => {
+    this.setState({ mostraComentario: !this.state.mostraComentario })
   }
 
   render() {
     return (
-      <div className="App">
+      <Container>
         { 
-          this.state.alunos.map( aluno => 
-            <Perfil clicou={ this.clone } {...aluno} />
-          )
+          !this.state.mostraComentario ?
+            <HomePage mostraComentario={this.mostraComentario} />:
+            <ComentariosPage mostraComentario={this.mostraComentario} />
         }
-      </div>
+        
+      </Container>
     )
   }
 }
