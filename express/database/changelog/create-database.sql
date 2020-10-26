@@ -1,6 +1,8 @@
 CREATE TABLE usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR
+    nome VARCHAR,
+    email VARCHAR,
+    senha VARCHAR
 );
 
 CREATE TABLE posts (
