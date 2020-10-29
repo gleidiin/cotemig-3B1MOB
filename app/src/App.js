@@ -1,36 +1,32 @@
 import React from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 
-import HomePage from './containers/HomePage';
-import ComentariosPage from './containers/ComentariosPage';
+import HomePage from './containers/HomePage/';
+import LoginPage from './containers/LoginPage/';
+import ComentariosPage from './containers/ComentarioPage/';
 
 import { Container } from 'react-bootstrap';
 
-
-class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { mostraComentario: false }
-  }
-
-  mostraComentario = () => {
-    this.setState({ mostraComentario: !this.state.mostraComentario })
-  }
-
-  render() {
-    return (
-      <Container>
-        { 
-          !this.state.mostraComentario ?
-            <HomePage mostraComentario={this.mostraComentario} />:
-            <ComentariosPage mostraComentario={this.mostraComentario} />
-        }
-        
-      </Container>
-    )
-  }
+const App = () => {
+  return (
+    <Container>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={LoginPage}></Route>
+          <Route path="/home" component={HomePage}></Route>
+          <Route path="/comentarios/:id" component={ ComentariosPage }></Route>
+          <Route path="*">
+            <h2>Essa página não existe :'(</h2>
+          </Route>
+        </Switch>
+      </Router>
+    </Container>
+  )
 }
 
 export default App;
