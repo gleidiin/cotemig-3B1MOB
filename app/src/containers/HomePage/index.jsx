@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 
 import { getMe } from '../../services/login-service'; 
 import { pegaTodosPost } from '../../services/post-service'; 
@@ -25,14 +24,13 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <Container>
-                { this.state.usuario.nome }
+            <div>
                 {
                     this.state.posts.map(post =>
                         (<PostContainer key={post.id} { ...post } />)
                     )
                 }
-            </Container>
+            </div>
         )
     }
 }

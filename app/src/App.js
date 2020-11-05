@@ -3,28 +3,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 
 import HomePage from './containers/HomePage/';
 import LoginPage from './containers/LoginPage/';
 import ComentariosPage from './containers/ComentarioPage/';
 
-import { Container } from 'react-bootstrap';
+import { isLoggged } from './services/login-service';
+
+import { Container, Row, Col } from 'react-bootstrap';
+
+const PrivateRoute = (props) => {
+  return isLoggged() ? <Route { ...props } /> : <Redirect to="/" />
+}
 
 const App = () => {
   return (
     <Container>
-      <Router>
-        <Switch>
-          <Route path="/" exact component={LoginPage}></Route>
-          <Route path="/home" component={HomePage}></Route>
-          <Route path="/comentarios/:id" component={ ComentariosPage }></Route>
-          <Route path="*">
-            <h2>Essa página não existe :'(</h2>
-          </Route>
-        </Switch>
-      </Router>
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <Router>
+            <Switch>
+              <Route path="/" exact component={LoginPage}></Route>
+              <PrivateRoute path="/home" component={HomePage}></PrivateRoute>
+              <PrivateRoute path="/comentarios/:id" component={ ComentariosPage }></PrivateRoute>
+              <Route path="*">
+                <h2>Essa página não existe :'(</h2>
+              </Route>
+            </Switch>
+          </Router>
+        </Col>
+      </Row>
     </Container>
   )
 }

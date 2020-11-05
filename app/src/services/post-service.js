@@ -9,6 +9,11 @@ export async function pegaTodosPost() {
     return req.data ? req.data : [];
 } 
 
+export async function pegaPostPorId(id) {
+    const req = await http.get(POST_URI + id);
+    return req.data;
+} 
+
 export async function likePostPorId(id) {
     await http.post(POST_URI + id +  LIKE_URI);
 }

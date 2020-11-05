@@ -5,6 +5,10 @@ const AUTH_ME = '/auth/me';
 const AUTH_SIGNUP = '/auth/signup';
 
 
+export const isLoggged = () => {
+    return !!localStorage.getItem('token');
+}
+
 const salvaToken = (token) => {
     localStorage.setItem("token", token);
 } 
