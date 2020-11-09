@@ -1,0 +1,44 @@
+.image-owner-container {
+
+}
+
+.image-owner-container h3 {
+    padding-top: 7px;
+    padding-left: 5px;
+    margin-top: 12px;
+    margin-bottom: 0px;
+    font-size: 16px;
+}
+
+.image-owner-container p {
+    font-size: 14px;
+    margin-bottom: 3px
+}
+
+.image-container {
+    margin-top: 10px;
+    min-height: 25vh;
+    border-radius: 17px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    max-width: 100%;
+    display: block; 
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.action-buttons img {
+    margin-right: 9px;
+}
+
+.action-buttons span {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.action-buttons:hover, .action-buttons {
+    text-decoration: none;
+    color: #000;
+}

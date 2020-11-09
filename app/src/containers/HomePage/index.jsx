@@ -3,7 +3,7 @@ import React from 'react';
 import { getMe } from '../../services/login-service'; 
 import { pegaTodosPost } from '../../services/post-service'; 
 
-import PostContainer from './post-container';
+import PostContainer from '../../components/post-container';
 
 class HomePage extends React.Component {
 

@@ -28,7 +28,7 @@ const App = () => {
             <Switch>
               <Route path="/" exact component={LoginPage}></Route>
               <PrivateRoute path="/home" component={HomePage}></PrivateRoute>
-              <PrivateRoute path="/comentarios/:id" component={ ComentariosPage }></PrivateRoute>
+              <PrivateRoute path="/comentarios/:id" component={ComentariosPage}></PrivateRoute>
               <Route path="*">
                 <h2>Essa página não existe :'(</h2>
               </Route>
