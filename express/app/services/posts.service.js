@@ -1,4 +1,4 @@
-const { PostModel, PostLikeModel, PostComentarioModel } = require("../models");
+const { PostModel, PostLikeModel, PostComentarioModel, UsuarioModel } = require("../models");
 const errorHandler = require("../helpers/error-handler");
 
 
@@ -16,7 +16,15 @@ const buscarTodos = async (idUsuario) => {
 }
 
 const buscarPorId = async (id) => { 
-    const post = await PostModel.findByPk(id, { include: [ PostLikeModel, PostComentarioModel ]});
+    let post = await PostModel.findByPk(id, { include: [ PostLikeModel ]});
+
+    const postComentarios = await PostComentarioModel.findAll({
+        where: { post_id: id },
+        include: [ UsuarioModel ]
+    });
+    
+    post = post.toJSON();
+    post['postComentarios'] = postComentarios;
     return post;
 }
 

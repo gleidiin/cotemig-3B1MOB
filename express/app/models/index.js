@@ -5,6 +5,7 @@ const UsuarioModel = require("./usuario.model");
 
 PostModel.hasMany(PostLikeModel);
 PostModel.hasMany(PostComentarioModel);
+PostComentarioModel.belongsTo(UsuarioModel);
 
 module.exports = {
     UsuarioModel,

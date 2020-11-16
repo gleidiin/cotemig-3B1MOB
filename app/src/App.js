@@ -10,6 +10,7 @@ import {
 import HomePage from './containers/HomePage/';
 import LoginPage from './containers/LoginPage/';
 import ComentariosPage from './containers/ComentarioPage/';
+import SignupPage from './containers/SignupPage/';
 
 import { isLoggged } from './services/login-service';
 
@@ -26,9 +27,10 @@ const App = () => {
         <Col md={6}>
           <Router>
             <Switch>
-              <Route path="/" exact component={LoginPage}></Route>
-              <PrivateRoute path="/home" component={HomePage}></PrivateRoute>
-              <PrivateRoute path="/comentarios/:id" component={ComentariosPage}></PrivateRoute>
+              <Route path="/" exact component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
+              <PrivateRoute path="/home" component={HomePage} />
+              <PrivateRoute path="/comentarios/:id" component={ComentariosPage} / >
               <Route path="*">
                 <h2>Essa página não existe :'(</h2>
               </Route>

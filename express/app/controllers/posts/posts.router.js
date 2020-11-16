@@ -7,7 +7,7 @@ const PARAM_ID = ':id'
 
 const router  = express.Router()
     .get(PATH, auth, pegarTodosPost)
-    .post(PATH + PARAM_ID + '/comentario', auth, comentar)
+    .post(PATH + PARAM_ID + '/comentarios', auth, comentar)
     .post(PATH + PARAM_ID + '/like', auth, gostei)
     .get(PATH + PARAM_ID, auth, pegarPostPorId)
     .post(PATH, auth, criarPost);
