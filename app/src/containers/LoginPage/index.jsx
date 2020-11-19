@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Form, FormControl, Button, Alert } from 'react-bootstrap';
 import { doLogin } from '../../services/login-service';
 
@@ -34,7 +34,7 @@ const LoginPage = () => {
                 </Alert>
             )
         }
-        <Form onSubmit={ login }>
+        <Form className="form-container" onSubmit={ login }>
             <Form.Group>
                 <Form.Label>E-mail</Form.Label>
                 <FormControl type="email" name="email" onChange={
@@ -47,6 +47,7 @@ const LoginPage = () => {
             </Form.Group>
             <Form.Group>
                 <Button type="submit">Entrar</Button>
+                <Link className="float-right" to="/signup">Criar uma conta</Link>
             </Form.Group>
         </Form>
     </div>)

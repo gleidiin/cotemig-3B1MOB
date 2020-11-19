@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { doSignup } from '../../services/login-service';
 import { Form, FormControl, FormGroup, Button } from 'react-bootstrap'
 
@@ -18,8 +18,7 @@ const SignupPage = () => {
         });
     }
 
-    return <>
-        <Form onSubmit={cadastrar}>
+    return <Form className="form-container" onSubmit={cadastrar}>
             <FormGroup>
                 <Form.Label>Seu nome</Form.Label>
                 <FormControl onChange={inputHandler} type="text" name="nome" />
@@ -34,9 +33,9 @@ const SignupPage = () => {
             </FormGroup>
             <FormGroup>
                 <Button type="submit">Cadastrar agora</Button>
+                <Link className="float-right" to="/">Acessar minha conta</Link>
             </FormGroup>
-        </Form>
-    </>;
+        </Form>;
 }
 
 export default SignupPage

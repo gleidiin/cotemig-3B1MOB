@@ -5,6 +5,7 @@ import './post-container.css';
 import { likePostPorId } from '../services/post-service';
 import { Image, Row, Col } from 'react-bootstrap';
 
+const Conditional = (props) => (<>{ props.condition ?  props.children : null }</>)
 
 const PostContainer = (props) => {
     const [likeState, setLiked] = useState({ isLiked: props.isLiked, likesCount: props.postLikes.length });
@@ -15,33 +16,44 @@ const PostContainer = (props) => {
             isLiked: !likeState.isLiked
         });
     }  
+    const formatDate = (date) => {
+        const format = new Date(date)
+        return format.toLocaleString()
+    }
+
     return (
         <>  
             <div className="image-owner-container">
-                <Image className="d-block" style={ { borderRadius: "150px", maxHeight: '50px', maxWidth: '50px' }} className="float-left" src="https://via.placeholder.com/300" />
-                <h3>Nome do Usuário</h3>
-                <p>{ props.post_data}</p>
+                <Image className="d-inline-block" style={ { borderRadius: "150px", marginBottom: "10px", maxHeight: '50px', maxWidth: '50px' }}  src="https://via.placeholder.com/300" />
+                <div className="pt-3 d-inline-block">
+                    <h3> Nome do Usuário </h3>
+                    <p>{ formatDate(props.post_data) }</p>
+                </div>
             </div>
-            <div className="image-container" style={{ backgroundImage: 'url(' + props.foto_url + ')'}} >
+            <div className="image-container" style={{
+                backgroundImage: 'url(' + props.foto_url + ')'
+            }} >
 
             </div>
-            <p className="pt-2">{ props.descricao }</p> 
-            <div className="py-2">
-                <Row>
-                    <Col md={2}>
-                        <p onClick={ () => doLike(props.id) } className="action-buttons">
-                            <Image src={ likeState.isLiked ? '/assets/icon-liked.png' : '/assets/icon-like.png' } ></Image>
-                            <span>{ likeState.likesCount } </span>
-                        </p>
-                    </Col>
-                    <Col md={2}>
-                        <Link className="action-buttons" to={'/comentarios/' + props.id }>
-                            <Image src="/assets/icon-comment.png"></Image>
-                            <span>{props.postComentarios.length}</span>
-                        </Link>
-                    </Col>
-                </Row>
-            </div>
+            <p className="image-description">{ props.descricao }</p> 
+            <Conditional condition={ props.showActions }>
+                <div className="py-2">
+                    <Row>
+                        <Col md={3}>
+                            <p onClick={ () => doLike(props.id) } className="action-buttons">
+                                <Image className="d-inline" src={ likeState.isLiked ? '/assets/icon-liked.png' : '/assets/icon-like.png' } ></Image>
+                                <span className="d-inline">{ likeState.likesCount } </span>
+                            </p>
+                        </Col>
+                        <Col md={3}>
+                            <Link className="action-buttons" to={'/comentarios/' + props.id }>
+                                <Image className="d-inline" src="/assets/icon-comment.png"></Image>
+                                <span className="d-inline">{props.postComentarios.length}</span>
+                            </Link>
+                        </Col>
+                    </Row>
+                </div>
+            </Conditional>
               
         </>
     )

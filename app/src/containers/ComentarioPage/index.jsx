@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-
+import { Row, Col, Image } from 'react-bootstrap'
+ 
 import { Form, FormControl, FormGroup,  Button } from 'react-bootstrap';
 
 import { pegaPostPorId, fazerComentarioPorPostId } from '../../services/post-service';
@@ -27,12 +28,26 @@ const ComentariosPage = () => {
 
     return (<div>
         <PostContainer {...post} />
+        <hr className="pb-1" />
+        <div className="pb-4">
+            <Image className="d-inline" src="/assets/icon-comment.png"></Image>
+            <h4 className="pl-2 d-inline">
+                Comentários
+            </h4>
+        </div>
             { !!post.postComentarios.length ? '': <h5 className="pt-3 pb-2 text-center">Não encontramos nenhum comentário, seja o primeiro a comentar. :) </h5>}
-        <ul>
-            { post.postComentarios.map(comentario => <li key={comentario.id}>
-              {comentario.usuario.nome}: {comentario.comentario}
-            </li>)}
-        </ul>
+        
+        { post.postComentarios.map(comentario => <Row className="pb-2" key={comentario.id}>
+            <Col md={2}>
+                <Image className="d-block mx-auto" style={ { borderRadius: "150px", marginBottom: "10px", maxHeight: '40px', maxWidth: '40px' }}  src="https://via.placeholder.com/300" />
+            </Col>
+            <Col md={10}>
+                <p>
+                    <strong>{comentario.usuario.nome}:</strong> {comentario.comentario}
+                </p>
+            </Col>
+        </Row>)}
+        
 
         <Form onSubmit={ enviarComentario }>
             <FormGroup>

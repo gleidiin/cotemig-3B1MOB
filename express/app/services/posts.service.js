@@ -11,7 +11,6 @@ const buscarTodos = async (idUsuario) => {
         return postAlterado;
     });
 
-
     return todosPosts
 }
 

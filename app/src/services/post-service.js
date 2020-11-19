@@ -5,12 +5,13 @@ const LIKE_URI = '/like/';
 const COMENTARIO_URI = '/comentarios/';
 
 export async function pegaTodosPost() {
-    const req = await http.get(POST_URI);
+    const req = await http.get(POST_URI, { clearCacheEntry: true });
+    console.log(req.request.fromCache, req.data)
     return req.data ? req.data : [];
 } 
 
 export async function pegaPostPorId(id) {
-    const req = await http.get(POST_URI + id);
+    const req = await http.get(POST_URI + id, { clearCacheEntry: true });
     return req.data;
 } 
 
